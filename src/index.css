@@ -1,1 +1,18 @@
+/* Tailwind */
 @import "tailwindcss";
+@import "tw-animate-css";
+
+/* UI */
+@import "shadcn/tailwind.css";
+
+/* Fonts */
+@import "@fontsource-variable/geist";
+
+/* Theme */
+@import "./styles/theme.css";
+
+/* Animations */
+@import "./styles/animations.css";
+
+/* Utilities */
+@import "./styles/utilities.css";

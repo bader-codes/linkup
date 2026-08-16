@@ -1,0 +1,10 @@
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(-4px);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
