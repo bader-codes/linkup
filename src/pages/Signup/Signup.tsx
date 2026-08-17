@@ -3,7 +3,6 @@ import RegisterForm from "#components/register/RegisterForm.tsx";
 import { Card, CardContent } from "#components/ui/card.tsx";
 import Container from "#components/shared/Container.tsx";
 
-
 export default function Signup() {
   return (
     <section className="py-8 md:py-12">
