@@ -1,18 +1,28 @@
+import { mapRegisterFormToPayload } from "../../mappers/register.mapper";
 import InputField from "#components/shared/input-field.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Button } from "#components/ui/button.tsx";
+import { signup } from "../../api/users.api";
+import { ImSpinner2 } from "react-icons/im";
 import GenderSelect from "./GenderSelect";
 import { useForm } from "react-hook-form";
 import { MdEmail } from "react-icons/md";
 import DateOfBirth from "./DateOfBirth";
 import { FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import axios from "axios";
 import {
   registerSchema,
   type RegisterFormValues,
 } from "#components/schemas/registerSchema.ts";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -37,23 +47,28 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema),
   });
 
-  const handleRegisterSubmit = (formValues: RegisterFormValues) => {
-    const registerPayload = {
-      name: `${formValues.firstName} ${formValues.lastName}`,
-      username: formValues.username,
-      email: formValues.email,
-      dateOfBirth: [
-        formValues.dateOfBirth.year,
-        formValues.dateOfBirth.month.padStart(2, "0"),
-        formValues.dateOfBirth.day.padStart(2, "0"),
-      ].join("-"),
-      gender: formValues.gender,
-      password: formValues.password,
-      rePassword: formValues.rePassword,
-    };
+  const handleRegisterSubmit = async (formValues: RegisterFormValues) => {
+    setIsLoading(true);
 
-    console.log(registerPayload);
-    
+    try {
+      const registerPayload = mapRegisterFormToPayload(formValues);
+
+      const response = await signup(registerPayload);
+
+      toast.success(response.message);
+
+      localStorage.setItem("token", response.data.token);
+
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message ?? "Something went wrong");
+      } else {
+        toast.error("Something went wrong");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -62,9 +77,7 @@ export default function RegisterForm() {
         <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-5">
           {/* First Name */}
           <InputField
-            {...register("firstName", {
-              required: { value: true, message: "email is requeird" },
-            })}
+            {...register("firstName")}
             id="f-name"
             label="First Name"
             placeholder="Enter your first name"
@@ -104,7 +117,7 @@ export default function RegisterForm() {
         />
 
         {/* Date of Birth */}
-        <DateOfBirth control={control} error={errors.dateOfBirth?.message}/>
+        <DateOfBirth control={control} error={errors.dateOfBirth?.message} />
 
         {/* Gender */}
         <GenderSelect control={control} error={errors.gender?.message} />
@@ -132,8 +145,12 @@ export default function RegisterForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full py-5 cursor-pointer">
-        Create Account
+      <Button
+        type="submit"
+        disabled={isLoading}
+        className="w-full py-5 cursor-pointer"
+      >
+        {isLoading ? <ImSpinner2 className="animate-spin" /> : "Create Account"}
       </Button>
     </form>
   );
