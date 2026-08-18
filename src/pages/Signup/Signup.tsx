@@ -2,6 +2,7 @@ import RegisterBanner from "#components/register/RegisterBanner.tsx";
 import RegisterForm from "#components/register/RegisterForm.tsx";
 import { Card, CardContent } from "#components/ui/card.tsx";
 import Container from "#components/shared/Container.tsx";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   return (
@@ -26,7 +27,19 @@ export default function Signup() {
               <RegisterBanner />
             </div>
 
-            <RegisterForm />
+            <div className="space-y-6">
+              <RegisterForm />
+
+              <p className="font-semibold text-center text-sm text-muted-foreground">
+                Already have an account?{" "}
+                <Link
+                  to="/login"
+                  className="font-semibold text-primary transition-colors hover:text-primary/80"
+                >
+                  Log in
+                </Link>
+              </p>
+            </div>
           </CardContent>
         </Card>
       </Container>
