@@ -16,13 +16,11 @@ export const registerSchema = z
 
     username: z
       .string()
-      .refine(
-        (value) => value === "" || /^[a-zA-Z0-9_]+$/.test(value),
-        "Username can only contain letters, numbers, and underscores",
-      )
-      .refine(
-        (value) => value === "" || value.length >= 5,
-        "Username must be at least 5 characters",
+      .min(1, "Username is required")
+      .max(10, "Username must be at most 10 characters")
+      .regex(
+        /^[a-zA-Z]{3}[a-zA-Z0-9]*$/,
+        "Username must start with at least 3 letters and contain only letters and numbers",
       ),
 
     email: z
@@ -102,20 +100,25 @@ export const registerSchema = z
       .min(1, "Password is required")
       .min(8, "Password must be at least 8 characters")
       .refine(
-        (value) => (value.match(/\d/g) || []).length >= 4,
-        "Password must contain at least 4 numbers",
+        (value) => /[A-Z]/.test(value),
+        "Password must contain at least 1 uppercase letter",
       )
       .refine(
         (value) => /[a-z]/.test(value),
         "Password must contain at least 1 lowercase letter",
       )
       .refine(
-        (value) => /[A-Z]/.test(value),
-        "Password must contain at least 1 uppercase letter",
+        (value) => (value.match(/\d/g) || []).length >= 4,
+        "Password must contain at least 4 numbers",
+      )
+      .refine(
+        (value) => /[#?!@$%^&*-]/.test(value),
+        "Password must contain at least 1 special character",
       ),
 
     rePassword: z.string().min(1, "Please confirm your password"),
   })
+
   .refine((data) => data.password === data.rePassword, {
     message: "Passwords do not match",
     path: ["rePassword"],

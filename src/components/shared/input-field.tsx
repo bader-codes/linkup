@@ -22,11 +22,7 @@ export default function InputField({
       <Label htmlFor={id}>
         {label}
 
-        {id === "user-name" ? (
-          <span> (optional)</span>
-        ) : (
-          <span className="text-red-600">*</span>
-        )}
+        <span className="text-red-600">*</span>
       </Label>
 
       <div className="relative">
