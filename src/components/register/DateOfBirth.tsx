@@ -1,4 +1,4 @@
-import type { RegisterFormValues } from "#components/schemas/registerSchema.ts";
+import type { RegisterFormValues } from "../../schemas/registerSchema";
 import { Controller, type Control } from "react-hook-form";
 import { Label } from "#components/ui/label.tsx";
 import {

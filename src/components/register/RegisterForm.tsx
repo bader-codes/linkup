@@ -16,7 +16,8 @@ import axios from "axios";
 import {
   registerSchema,
   type RegisterFormValues,
-} from "#components/schemas/registerSchema.ts";
+} from "../../schemas/registerSchema";
+
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
@@ -55,16 +56,22 @@ export default function RegisterForm() {
 
       const response = await signup(registerPayload);
 
-      toast.success(response.message);
+      toast.success(response.message, { autoClose: 1500 });
 
       localStorage.setItem("token", response.data.token);
 
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 999);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data?.message ?? "Something went wrong");
+        toast.error(error.response?.data?.message ?? "Something went wrong", {
+          autoClose: 1500,
+        });
       } else {
-        toast.error("Something went wrong");
+        toast.error("Something went wrong", {
+          autoClose: 1500,
+        });
       }
     } finally {
       setIsLoading(false);
