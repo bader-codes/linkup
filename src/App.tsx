@@ -1,17 +1,31 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthContextProvider from "./context/AuthContext";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import NotFound from "./pages/NotFound/NotFound";
 import { ToastContainer } from "react-toastify";
 import Profile from "./pages/Profile/Profile";
+import GuestRoute from "./routes/GuestRoute";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/login", element: <Login /> },
-  { path: "/signup", element: <Signup /> },
-  { path: "/profile", element: <Profile /> },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/profile", element: <Profile /> },
+    ],
+  },
+
+  {
+    element: <GuestRoute />,
+    children: [
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
+    ],
+  },
+
   { path: "*", element: <NotFound /> },
 ]);
 

@@ -58,9 +58,7 @@ export default function LoginForm() {
 
       setUserToken(localStorage.getItem("token"));
 
-      setTimeout(() => {
-        navigate("/");
-      }, 999);
+      navigate("/", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setServerError(

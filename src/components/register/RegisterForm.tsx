@@ -60,9 +60,7 @@ export default function RegisterForm() {
 
       localStorage.setItem("token", response.data.token);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 999);
+      navigate("/", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data?.message ?? "Something went wrong", {
