@@ -52,14 +52,21 @@ export default function RegisterForm() {
     setIsLoading(true);
 
     try {
+      // Prepare payload
       const registerPayload = mapRegisterFormToPayload(formValues);
 
+      // Send request
       const response = await signup(registerPayload);
 
-      toast.success(response.message, { autoClose: 1500 });
+      // Show success message
+      toast.success(response.message, {
+        autoClose: 1500,
+      });
 
+      // Save authentication token
       localStorage.setItem("token", response.data.token);
 
+      // Redirect to home
       navigate("/", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {

@@ -1,9 +1,9 @@
-import Feed from "#components/home/Feed.tsx";
+import Header from "#components/home/header/Header.tsx";
 
 export default function Home() {
   return (
-    <>
-      <Feed />
-    </>
+    <div className="bg-gray-50">
+      <Header />
+    </div>
   );
 }
