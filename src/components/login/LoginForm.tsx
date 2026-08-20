@@ -48,16 +48,24 @@ export default function LoginForm() {
     setServerError(null);
 
     try {
+      // Prepare payload
       const loginPayload = mapLoginFormToPayload(formValues);
 
+      // Send request
       const response = await signin(loginPayload);
 
-      toast.success(response.message, { autoClose: 1500 });
+      // Show success message
+      toast.success(response.message, {
+        autoClose: 1500,
+      });
 
+      // Save authentication token
       localStorage.setItem("token", response.data.token);
 
+      // Update authentication state
       setUserToken(localStorage.getItem("token"));
 
+      // Redirect to home
       navigate("/", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {
