@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UserProfile from "./pages/UserProfile/UserProfile";
 import AuthContextProvider from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import NotFound from "./pages/NotFound/NotFound";
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/profile", element: <Profile /> },
+      { path: "/profile/:username", element: <UserProfile /> },
     ],
   },
 
