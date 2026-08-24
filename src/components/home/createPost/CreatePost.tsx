@@ -1,3 +1,7 @@
+import { createPost } from "../../../api/posts/create-post.api";
+import { MdClose } from "react-icons/md";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -5,10 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "#components/ui/dialog.tsx";
-import { useState } from "react";
-import { createPost } from "../../../api/posts/create-post.api";
-import { Loader2 } from "lucide-react";
-import { MdClose } from "react-icons/md";
 
 export default function CreatePost() {
   const [image, setImage] = useState<File | null>(null);
@@ -17,8 +17,6 @@ export default function CreatePost() {
   const [isLoading, setIsLoading] = useState(false);
 
   const canSubmit = Boolean(body.trim() || image);
-
-  console.log(image);
 
   const handleCreatePost = async () => {
     if (!body.trim() && !image) return;
@@ -56,10 +54,8 @@ export default function CreatePost() {
       }}
     >
       <div className="w-[95%] mx-auto px-4 py-3 md:py-5 bg-white rounded-md flex items-center gap-3">
-        <DialogTrigger className="w-full">
-          <button className="w-full rounded-xl p-2 md:p-3 bg-[#F0F2F5] text-left text-gray-500 cursor-pointer">
-            What's on your mind?
-          </button>
+        <DialogTrigger className="w-full rounded-xl p-2 md:p-3 bg-[#F0F2F5] text-left text-gray-500 cursor-pointer">
+          What's on your mind?
         </DialogTrigger>
 
         <div className="w-10 h-10 rounded-full bg-indigo-400">
