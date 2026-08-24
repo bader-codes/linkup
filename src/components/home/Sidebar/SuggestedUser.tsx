@@ -1,5 +1,5 @@
-import type { SuggestedUser } from "../../../../types/suggestions/suggestions-response";
-import { getSuggestions } from "../../../../api/suggestions/suggestions.api";
+import type { SuggestedUser } from "../../../types/suggestions/suggestions-response";
+import { getSuggestions } from "../../../api/suggestions/suggestions.api";
 import { useEffect, useState } from "react";
 import FollowButton from "./FollowButton";
 import { Link } from "react-router-dom";
@@ -34,7 +34,7 @@ export default function SuggestionsSidebar() {
   }
 
   return (
-    <aside className="hidden w-full rounded-sm border-r p-4 md:block">
+    <aside className="hidden w-full rounded-sm border-r p-4 md:block bg-white">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold">People you may know</h2>
       </div>

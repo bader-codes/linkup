@@ -1,4 +1,4 @@
-import { followUser } from "../../../../api/suggestions/follow.api";
+import { followUser } from "../../../api/suggestions/follow.api";
 import { FaCheck, FaPlus } from "react-icons/fa";
 import { useState } from "react";
 

@@ -1,4 +1,4 @@
-import SuggestionsSidebar from "#components/home/Sidebar/FollowUser/SuggestedUser.tsx";
+import SuggestionsSidebar from "#components/home/Sidebar/SuggestedUser.tsx";
 import PostCardData from "#components/shared/users/PostCardData.tsx";
 import Container from "#components/shared/Container.tsx";
 import Header from "#components/home/header/Header.tsx";
