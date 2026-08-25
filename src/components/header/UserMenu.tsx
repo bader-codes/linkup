@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "#components/ui/avatar.tsx";
-import { AuthContext } from "../../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
 import {
@@ -51,7 +51,7 @@ export default function UserMenu() {
       <DropdownMenuContent align="center" className="w-50" sideOffset={12}>
         <DropdownMenuItem className="text-lg cursor-pointer">
           <FaUser className="size-4 md:size-5 shrink-0" />
-          <span>Profile</span>
+          <Link to="/profile">Profile</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem className="text-lg cursor-pointer">

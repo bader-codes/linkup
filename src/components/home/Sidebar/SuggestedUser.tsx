@@ -1,34 +1,26 @@
-import type { SuggestedUser } from "../../../types/suggestions/suggestions-response";
-import { getSuggestions } from "../../../api/suggestions/suggestions.api";
-import { useEffect, useState } from "react";
+import { useSuggestions } from "../../../hooks/users/useSuggestions";
+import { useQueryClient } from "@tanstack/react-query";
 import FollowButton from "./FollowButton";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function SuggestionsSidebar() {
   const [followedUserId, setFollowedUserId] = useState<string | null>(null);
-  const [users, setUsers] = useState<SuggestedUser[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  async function fetchSuggestions() {
-    try {
-      const data = await getSuggestions();
+  const queryClient = useQueryClient();
 
-      setUsers(data.data.suggestions);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const { data, isLoading } = useSuggestions();
 
-  useEffect(() => {
-    fetchSuggestions();
-  }, []);
+  const users = data?.data.suggestions ?? [];
 
   async function handleFollowSuccess(userId: string) {
     setFollowedUserId(userId);
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    await fetchSuggestions();
+    await queryClient.invalidateQueries({
+      queryKey: ["suggestions"],
+    });
 
     setFollowedUserId(null);
   }
