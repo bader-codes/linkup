@@ -1,6 +1,8 @@
-import { Avatar, AvatarFallback, AvatarImage } from "#components/ui/avatar.tsx";
-import { AuthContext } from "../../context/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
+import { FaArrowRightFromBracket, FaGear } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "@/context/AuthContext";
+import { FaBookmark, FaUser } from "react-icons/fa";
 import { useContext } from "react";
 
 import {
@@ -9,9 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "#components/ui/dropdown-menu.tsx";
-import { FaArrowRightFromBracket, FaGear } from "react-icons/fa6";
-import { FaBookmark, FaUser } from "react-icons/fa";
+} from "@/components/ui/dropdown-menu.tsx";
 
 export default function UserMenu() {
   const navigate = useNavigate();

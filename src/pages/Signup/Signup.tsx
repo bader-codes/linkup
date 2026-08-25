@@ -1,7 +1,7 @@
-import RegisterBanner from "#components/register/RegisterBanner.tsx";
-import RegisterForm from "#components/register/RegisterForm.tsx";
-import { Card, CardContent } from "#components/ui/card.tsx";
-import Container from "#components/shared/Container.tsx";
+import RegisterBanner from "@/components/register/RegisterBanner.tsx";
+import RegisterForm from "@/components/register/RegisterForm.tsx";
+import { Card, CardContent } from "@/components/ui/card.tsx";
+import Container from "@/components/shared/Container.tsx";
 import { Link } from "react-router-dom";
 
 export default function Signup() {

@@ -1,7 +1,7 @@
-import type { RegisterFormValues } from "../../schemas/registerSchema";
-import { RadioGroup, RadioGroupItem } from "#components/ui/radio-group.tsx";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group.tsx";
+import type { RegisterFormValues } from "@/schemas/registerSchema";
 import { Controller, type Control } from "react-hook-form";
-import { Label } from "#components/ui/label.tsx";
+import { Label } from "@/components/ui/label.tsx";
 
 type GenderSelectProps = {
   control: Control<RegisterFormValues>;

@@ -1,4 +1,4 @@
-import { useSuggestions } from "../../../hooks/users/useSuggestions";
+import { useSuggestions } from "@/hooks/users/use-suggestions";
 import { useQueryClient } from "@tanstack/react-query";
 import FollowButton from "./FollowButton";
 import { Link } from "react-router-dom";
@@ -26,7 +26,7 @@ export default function SuggestionsSidebar() {
   }
 
   return (
-    <aside className="hidden w-full rounded-sm border-r p-4 md:block bg-white">
+    <aside className="fixed hidden w-70 rounded-sm border-r p-4 md:block bg-white">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold">People you may know</h2>
       </div>

@@ -1,6 +1,6 @@
-import { Input } from "#components/ui/input.tsx";
-import { Label } from "#components/ui/label.tsx";
-import { cn } from "#lib/utils.ts";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
+import { cn } from "@/lib/utils.ts";
 import type { IconType } from "react-icons";
 
 type InputFieldProps = React.ComponentProps<typeof Input> & {

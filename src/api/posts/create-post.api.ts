@@ -1,4 +1,4 @@
-import type { CreatePostPayload } from "../../types/posts/create-post-payload";
+import type { CreatePostPayload } from "@/types/posts/create-post-payload";
 import { apiClient } from "../client";
 
 export const createPost = async ({ body, image }: CreatePostPayload) => {

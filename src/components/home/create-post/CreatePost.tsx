@@ -1,4 +1,4 @@
-import { createPost } from "../../../api/posts/create-post.api";
+import { createPost } from "@/api/posts/create-post.api";
 import { MdClose } from "react-icons/md";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "#components/ui/dialog.tsx";
+} from "@/components/ui/dialog";
 
 export default function CreatePost() {
   const [image, setImage] = useState<File | null>(null);

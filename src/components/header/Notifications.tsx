@@ -4,7 +4,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "#components/ui/popover.tsx";
+} from "@/components/ui/popover";
 import { ImCheckmark } from "react-icons/im";
 
 type Notification = {

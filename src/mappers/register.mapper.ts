@@ -1,5 +1,5 @@
-import type { RegisterFormValues } from "../schemas/registerSchema";
-import type { SignupPayload } from "../types/signup/signup-payload";
+import type { RegisterFormValues } from "@/schemas/registerSchema";
+import type { SignupPayload } from "@/types/signup/signup-payload";
 
 export const mapRegisterFormToPayload = (
   formValues: RegisterFormValues,

@@ -1,11 +1,11 @@
-import { loginSchema, type LoginFormValues } from "../../schemas/loginSchema";
-import { mapLoginFormToPayload } from "../../mappers/login.mapper";
-import InputField from "#components/shared/input-field.tsx";
-import { AuthContext } from "../../context/AuthContext";
+import { loginSchema, type LoginFormValues } from "@/schemas/loginSchema";
+import { mapLoginFormToPayload } from "@/mappers/login.mapper";
+import InputField from "../shared/input-field";
+import { AuthContext } from "@/context/AuthContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { signin } from "../../api/auth/signin.api";
-import { Button } from "#components/ui/button.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { signin } from "@/api/auth/signin.api";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ImSpinner2 } from "react-icons/im";

@@ -1,9 +1,9 @@
-import { mapRegisterFormToPayload } from "../../mappers/register.mapper";
-import InputField from "#components/shared/input-field.tsx";
+import { mapRegisterFormToPayload } from "@/mappers/register.mapper";
+import InputField from "@/components/shared/input-field.tsx";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Button } from "#components/ui/button.tsx";
-import { signup } from "../../api/auth/signup.api";
+import { Button } from "@/components/ui/button.tsx";
+import { signup } from "@/api/auth/signup.api";
 import { ImSpinner2 } from "react-icons/im";
 import GenderSelect from "./GenderSelect";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ import axios from "axios";
 import {
   registerSchema,
   type RegisterFormValues,
-} from "../../schemas/registerSchema";
+} from "@/schemas/registerSchema";
 
 import { useNavigate } from "react-router-dom";
 

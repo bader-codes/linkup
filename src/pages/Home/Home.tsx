@@ -1,6 +1,6 @@
-import SuggestionsSidebar from "#components/home/Sidebar/SuggestedUser.tsx";
-import PostCardData from "#components/shared/users/PostCardData.tsx";
-import Container from "#components/shared/Container.tsx";
+import SuggestionsSidebar from "@/components/home/sidebar/SuggestedUser.tsx";
+import PostCardData from "@/components/shared/users/PostCardData.tsx";
+import Container from "@/components/shared/Container.tsx";
 
 export default function Home() {
   return (
