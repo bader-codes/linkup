@@ -1,4 +1,4 @@
-import hero from "@/assets/imges/app icons coming out .png";
+import hero from "@/assets/images/coming out.png";
 
 export default function RegisterBanner() {
   return (

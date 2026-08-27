@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
-import { cn } from "@/lib/utils.ts";
 import type { IconType } from "react-icons";
+import { cn } from "@/lib/utils.ts";
 
 type InputFieldProps = React.ComponentProps<typeof Input> & {
   label: string;

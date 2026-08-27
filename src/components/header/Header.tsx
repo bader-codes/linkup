@@ -1,11 +1,11 @@
 import Notifications from "./Notifications";
+import { Link } from "react-router-dom";
 import FeedTabs from "./FeedTabs";
 import UserMenu from "./UserMenu";
-import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between bg-white py-2 px-2 md:px-4">
+    <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b bg-white px-2 py-2 md:px-4">
       {/* Left */}
       <Link
         to="/"

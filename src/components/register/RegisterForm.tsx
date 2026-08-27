@@ -1,9 +1,10 @@
 import { mapRegisterFormToPayload } from "@/mappers/register.mapper";
-import InputField from "@/components/shared/input-field.tsx";
+import InputField from "@/components/shared/InputField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Button } from "@/components/ui/button.tsx";
 import { signup } from "@/api/auth/signup.api";
+import { useNavigate } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
 import GenderSelect from "./GenderSelect";
 import { useForm } from "react-hook-form";
@@ -13,12 +14,11 @@ import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import axios from "axios";
+
 import {
   registerSchema,
   type RegisterFormValues,
 } from "@/schemas/registerSchema";
-
-import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);

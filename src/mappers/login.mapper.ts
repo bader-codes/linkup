@@ -1,5 +1,5 @@
+import type { SigninPayload } from "@/types/auth/signin-payload";
 import type { LoginFormValues } from "@/schemas/loginSchema";
-import type { SigninPayload } from "@/types/signin/signin-payload";
 
 export const mapLoginFormToPayload = (
   formValues: LoginFormValues,

@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { FaHouse, FaUserGroup } from "react-icons/fa6";
+import { useState } from "react";
 
 type FeedType = "home" | "following";
 

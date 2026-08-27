@@ -1,11 +1,12 @@
+import { ImCheckmark } from "react-icons/im";
 import { FaBell } from "react-icons/fa6";
 import { useState } from "react";
+
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ImCheckmark } from "react-icons/im";
 
 type Notification = {
   id: number;

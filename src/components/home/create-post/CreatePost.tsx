@@ -1,7 +1,9 @@
 import { createPost } from "@/api/posts/create-post.api";
+import { queryClient } from "@/lib/queryClient";
 import { MdClose } from "react-icons/md";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -34,6 +36,11 @@ export default function CreatePost() {
       setImage(null);
 
       setOpen(false);
+
+      // Refetch Posts after create post
+      queryClient.invalidateQueries({
+        queryKey: ["posts"],
+      });
     } catch (error) {
       console.log(error);
     } finally {
@@ -53,7 +60,7 @@ export default function CreatePost() {
         }
       }}
     >
-      <div className="w-[95%] mx-auto px-4 py-3 md:py-5 bg-white rounded-md flex items-center gap-3">
+      <div className="w-[95%] md:w-[85%] lg:w-[65%] mx-auto px-4 py-3 md:py-5 bg-white rounded-md flex items-center gap-3">
         <DialogTrigger className="w-full rounded-xl p-2 md:p-3 bg-[#F0F2F5] text-left text-gray-500 cursor-pointer">
           What's on your mind?
         </DialogTrigger>
