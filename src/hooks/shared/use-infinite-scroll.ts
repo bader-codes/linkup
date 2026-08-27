@@ -20,16 +20,12 @@ export default function useInfiniteScroll({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (
-          entry.isIntersecting &&
-          hasNextPage &&
-          !isFetchingNextPage
-        ) {
+        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
           fetchNextPage();
         }
       },
       {
-        rootMargin: "0px 0px 300px 0px",
+        rootMargin: "0px 0px 100px 0px",
       },
     );
 
