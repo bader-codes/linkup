@@ -1,4 +1,4 @@
-import type { SuggestionsResponse } from "../../types/suggestions/suggestions-response";
+import type { SuggestionsResponse } from "@/types/users/suggestions-response";
 import { apiClient } from "../client";
 
 export async function getSuggestions() {

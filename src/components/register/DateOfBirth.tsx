@@ -1,13 +1,14 @@
-import type { RegisterFormValues } from "../../schemas/registerSchema";
+import type { RegisterFormValues } from "@/schemas/registerSchema";
 import { Controller, type Control } from "react-hook-form";
-import { Label } from "#components/ui/label.tsx";
+import { Label } from "@/components/ui/label.tsx";
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "#components/ui/select.tsx";
+} from "@/components/ui/select.tsx";
 
 const days = Array.from({ length: 31 }, (_, i) => i + 1);
 

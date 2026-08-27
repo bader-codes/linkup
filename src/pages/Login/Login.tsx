@@ -1,7 +1,7 @@
-import { Card, CardContent } from "#components/ui/card.tsx";
-import LoginBanner from "#components/login/LoginBanner.tsx";
-import Container from "#components/shared/Container.tsx";
-import LoginForm from "#components/login/LoginForm.tsx";
+import { Card, CardContent } from "@/components/ui/card.tsx";
+import LoginBanner from "@/components/login/LoginBanner.tsx";
+import Container from "@/components/shared/Container.tsx";
+import LoginForm from "@/components/login/LoginForm.tsx";
 import { Link } from "react-router-dom";
 
 export default function Login() {

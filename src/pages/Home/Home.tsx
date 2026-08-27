@@ -1,22 +1,24 @@
-import SuggestionsSidebar from "#components/home/Sidebar/SuggestedUser.tsx";
-import PostCardData from "#components/shared/users/PostCardData.tsx";
-import Container from "#components/shared/Container.tsx";
+import SuggestionsSidebar from "@/components/home/sidebar/SuggestedUser.tsx";
+import CreatePost from "@/components/home/create-post/CreatePost";
+import Container from "@/components/shared/Container.tsx";
+import AllPosts from "@/components/posts/AllPosts";
 
 export default function Home() {
   return (
     <>
       <Container>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-[280px_minmax(0,1fr)]">
-            {/* Sidebar */}
-            <aside className="hidden md:block">
-              <SuggestionsSidebar />
-            </aside>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-[280px_minmax(0,1fr)]">
+          {/* Sidebar */}
+          <aside className="hidden md:block">
+            <SuggestionsSidebar />
+          </aside>
 
-            {/* Posts */}
-            <main className="w-full">
-              <PostCardData />
-            </main>
-          </div>
+          {/* Posts */}
+          <main className="w-full">
+            <CreatePost />
+            <AllPosts />
+          </main>
+        </div>
       </Container>
     </>
   );
