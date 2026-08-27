@@ -1,4 +1,9 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PostSkeleton() {
@@ -25,8 +30,6 @@ export default function PostSkeleton() {
           <Skeleton className="h-4 w-[75%]" />
           <Skeleton className="h-4 w-[50%]" />
         </div>
-
-        <Skeleton className="h-80 w-full rounded-xl" />
       </CardContent>
 
       {/* Footer */}
