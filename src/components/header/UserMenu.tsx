@@ -1,4 +1,8 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar.tsx";
 import { FaArrowRightFromBracket, FaGear } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "@/context/AuthContext";
@@ -23,11 +27,17 @@ export default function UserMenu() {
     throw new Error("LoginForm must be used within AuthContextProvider");
   }
 
-  const { setUserToken } = authContext;
+  const { setUserToken, setUser, user } = authContext;
 
   function handleLogout() {
+    // Remove token from local storage
     localStorage.removeItem("token");
     setUserToken(null);
+
+    // Remove user from local storage
+    localStorage.removeItem("user");
+    setUser(null);
+
     navigate("/login");
   }
 
@@ -40,8 +50,8 @@ export default function UserMenu() {
       >
         <Avatar className="size-8 md:size-9 lg:size-10">
           <AvatarImage
-            src="https://pub-3cba56bacf9f4965bbb0989e07dada12.r2.dev/linkedPosts/default-profile.png"
-            alt="User profile"
+            src={user?.photo || "/avatar.jpg"}
+            alt={user?.name || "Profile"}
           />
 
           <AvatarFallback>BM</AvatarFallback>

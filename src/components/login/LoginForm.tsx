@@ -26,7 +26,7 @@ export default function LoginForm() {
     throw new Error("LoginForm must be used within AuthContextProvider");
   }
 
-  const { setUserToken } = authContext;
+  const { setUserToken, setUser } = authContext;
 
   // React Hook Form Implmentation
   const {
@@ -63,7 +63,11 @@ export default function LoginForm() {
       localStorage.setItem("token", response.data.token);
 
       // Update authentication state
-      setUserToken(localStorage.getItem("token"));
+      setUserToken(response.data.token);
+      setUser(response.data.user);
+
+      // Save current user
+      localStorage.setItem("user", JSON.stringify(response.data.user));
 
       // Redirect to home
       navigate("/", { replace: true });

@@ -10,12 +10,12 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <Card className="w-[95%] md:w-[85%] lg:w-[65%] mx-auto my-4">
+    <Card className="mx-auto my-4 w-[95%] md:w-[85%] lg:w-[65%]">
       <PostHeader post={post} />
 
       <PostContent post={post} />
 
-      <PostActions />
+      <PostActions post={post} />
     </Card>
   );
 }
