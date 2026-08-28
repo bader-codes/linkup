@@ -2,7 +2,7 @@ import { createPost } from "@/api/posts/create-post.api";
 import { queryClient } from "@/lib/queryClient";
 import { MdClose } from "react-icons/md";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import {
   Dialog,
@@ -11,12 +11,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function CreatePost() {
   const [image, setImage] = useState<File | null>(null);
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error("LoginForm must be used within AuthContextProvider");
+  }
+
+  const { user } = authContext;
 
   const canSubmit = Boolean(body.trim() || image);
 
@@ -65,10 +74,10 @@ export default function CreatePost() {
           What's on your mind?
         </DialogTrigger>
 
-        <div className="w-10 h-10 rounded-full bg-indigo-400">
+        <div className="h-10 w-10 overflow-hidden rounded-full bg-indigo-400">
           <img
-            src="/avatar.jpg"
-            alt="Profile"
+            src={user?.photo || "/avatar.jpg"}
+            alt={user?.name || "Profile"}
             className="h-10 w-10 rounded-full object-cover"
           />
         </div>

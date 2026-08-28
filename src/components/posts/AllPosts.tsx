@@ -7,12 +7,10 @@ import PostCard from "./PostCard";
 export default function AllPosts() {
   const [searchParams] = useSearchParams();
 
-  const feed =
-    searchParams.get("feed") === "following"
-      ? "following"
-      : "home";
+  const feed = searchParams.get("feed") === "following" ? "following" : "home";
 
   const {
+    data,
     isLoading,
     isError,
     posts,
@@ -20,6 +18,9 @@ export default function AllPosts() {
     hasNextPage,
     isFetchingNextPage,
   } = useAllPosts(feed);
+
+  console.log(data);
+  
 
   const sentinelRef = useInfiniteScroll({
     hasNextPage,

@@ -16,7 +16,7 @@ export interface Post {
   privacy: string;
   user: PostUser;
   sharedPost: unknown | null;
-  likes: unknown[];
+  likes: string[];
   createdAt: string;
   commentsCount: number;
   topComment: unknown | null;

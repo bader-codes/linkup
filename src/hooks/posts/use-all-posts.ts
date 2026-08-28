@@ -5,13 +5,15 @@ import { getAllPostsAPI } from "@/api/posts/get-all-posts.api";
 import { queryClient } from "@/lib/queryClient";
 import { useEffect } from "react";
 
-type FeedType = "home" | "following";
+export type FeedType = "home" | "following";
+
+export const POSTS_QUERY_KEY = ["posts"];
 
 const LIMIT = 10;
 const REFRESH_INTERVAL = 15_000;
 
 export default function useAllPosts(feed: FeedType) {
-  const queryKey = ["posts", feed];
+  const queryKey = [...POSTS_QUERY_KEY, feed];
 
   const query = useInfiniteQuery({
     queryKey,
@@ -54,7 +56,7 @@ export default function useAllPosts(feed: FeedType) {
     }, REFRESH_INTERVAL);
 
     return () => clearInterval(interval);
-  }, [feed, query.data]);
+  }, [feed, query.data, queryKey]);
 
   const posts = query.data?.pages.flatMap((page) => page.data.posts) ?? [];
 
