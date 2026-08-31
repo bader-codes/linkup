@@ -1,4 +1,5 @@
 import type { Post } from "@/types/posts/get-all-posts.response";
+import CommentForm from "../comments/create-comment/CommentForm";
 import { Card } from "@/components/ui/card";
 import PostContent from "./PostContent";
 import PostActions from "./PostActions";
@@ -16,6 +17,8 @@ export default function PostCard({ post }: PostCardProps) {
       <PostContent post={post} />
 
       <PostActions post={post} />
+
+      <CommentForm post={post} />
     </Card>
   );
 }

@@ -30,7 +30,7 @@ export default function PostActions({ post }: PostActionsProps) {
   };
 
   return (
-    <CardFooter className="w-full border-none bg-white px-6 py-3">
+    <CardFooter className="w-full border-none bg-white px-6 p-0!">
       <div className="grid w-full grid-cols-3 border-t pt-2 px-4">
         {/* Like */}
         <div className="flex items-center justify-start">
