@@ -18,7 +18,7 @@ export default function PostTimestamp({ createdAt }: PostTimestampProps) {
   // Seconds
   if (diffInSeconds < MINUTE) {
     return (
-      <span>{diffInSeconds === 0 ? "now" : `${diffInSeconds} sec ago`}</span>
+      <span>{diffInSeconds < 5 ? "just now" : `${diffInSeconds} sec ago`}</span>
     );
   }
 
