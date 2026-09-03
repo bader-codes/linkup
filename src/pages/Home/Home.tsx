@@ -1,4 +1,4 @@
-import SuggestionsSidebar from "@/components/home/sidebar/SuggestedUser.tsx";
+import SuggestionsSidebar from "@/components/home/sidebar/SuggestedUser";
 import CreatePost from "@/components/home/create-post/CreatePost";
 import Container from "@/components/shared/Container.tsx";
 import AllPosts from "@/components/posts/AllPosts";
