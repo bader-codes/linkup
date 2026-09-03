@@ -1,3 +1,5 @@
+import type { Comment } from "../comments/get-comments.response";
+
 export interface GetAllPostsResponse {
   success: boolean;
   message: string;
@@ -19,7 +21,7 @@ export interface Post {
   likes: string[];
   createdAt: string;
   commentsCount: number;
-  topComment: unknown | null;
+  topComment: Comment;
   sharesCount: number;
   likesCount: number;
   isShare: boolean;

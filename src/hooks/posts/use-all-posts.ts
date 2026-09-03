@@ -19,6 +19,7 @@ export default function useAllPosts(feed: FeedType) {
     queryKey,
 
     queryFn: ({ pageParam }) => {
+      // Use the appropriate feed endpoint based on the selected feed
       if (feed === "following") {
         return getFollowingFeedAPI(pageParam, LIMIT);
       }
@@ -37,6 +38,7 @@ export default function useAllPosts(feed: FeedType) {
     const interval = setInterval(async () => {
       if (!query.data) return;
 
+      // Refresh only the first page to pick up newly created posts
       const latestPage =
         feed === "following"
           ? await getFollowingFeedAPI(1, LIMIT)
@@ -47,6 +49,7 @@ export default function useAllPosts(feed: FeedType) {
         (oldData) => {
           if (!oldData) return oldData;
 
+           // Replace the first page while preserving already loaded pages
           return {
             ...oldData,
             pages: [latestPage, ...oldData.pages.slice(1)],

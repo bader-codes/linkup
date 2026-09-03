@@ -1,7 +1,7 @@
 import useInfiniteScroll from "@/hooks/shared/use-infinite-scroll";
 import useAllPosts from "@/hooks/posts/use-all-posts";
 import { useSearchParams } from "react-router-dom";
-import PostSkeleton from "./PostSkeleton";
+import PostSkeleton from "../shared/PostSkeleton";
 import PostCard from "./PostCard";
 
 export default function AllPosts() {
@@ -10,7 +10,6 @@ export default function AllPosts() {
   const feed = searchParams.get("feed") === "following" ? "following" : "home";
 
   const {
-    data,
     isLoading,
     isError,
     posts,
@@ -18,9 +17,6 @@ export default function AllPosts() {
     hasNextPage,
     isFetchingNextPage,
   } = useAllPosts(feed);
-
-  console.log(data);
-  
 
   const sentinelRef = useInfiniteScroll({
     hasNextPage,

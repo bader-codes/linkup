@@ -8,7 +8,7 @@ interface PostContentProps {
 export default function PostContent({ post }: PostContentProps) {
   return (
     <CardContent className="space-y-4">
-      <p className="whitespace-pre-wrap text-sm leading-6 text-gray-700">
+      <p className="whitespace-pre-wrap text-lg mt-3 leading-6 text-gray-700">
         {post.body}
       </p>
 

@@ -9,9 +9,16 @@ import { useContext } from "react";
 
 interface PostActionsProps {
   post: Post;
+  
+  // Optional because PostActions is also rendered inside DescComment
+  // where the Comment action doesn't need to open another dialog.
+  onCommentClick?: () => void;
 }
 
-export default function PostActions({ post }: PostActionsProps) {
+export default function PostActions({
+  post,
+  onCommentClick,
+}: PostActionsProps) {
   const auth = useContext(AuthContext);
   const user = auth?.user;
 
@@ -31,7 +38,7 @@ export default function PostActions({ post }: PostActionsProps) {
 
   return (
     <CardFooter className="w-full border-none bg-white px-6 p-0!">
-      <div className="grid w-full grid-cols-3 border-t pt-2 px-4">
+      <div className="grid w-full grid-cols-3 py-2 px-4">
         {/* Like */}
         <div className="flex items-center justify-start">
           <div className="flex items-center gap-2">
@@ -54,15 +61,23 @@ export default function PostActions({ post }: PostActionsProps) {
         </div>
 
         {/* Comment */}
-        <div className="flex items-center justify-center">
-          <button
-            type="button"
-            className="group flex cursor-pointer items-center justify-center gap-2 rounded-lg py-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-blue-600"
-          >
-            <GoComment className="size-5 transition-transform group-hover:scale-110" />
-            <span className="text-sm font-medium">Comment</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onCommentClick}
+          className="cursor-pointer"
+        >
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center gap-2">
+              <GoComment className="size-5 transition-transform group-hover:scale-110" />
+
+              <span className="text-sm font-medium">Comment</span>
+            </div>
+
+            <span className="text-sm font-medium">
+              {post.commentsCount > 0 ? post.commentsCount : ""}
+            </span>
+          </div>
+        </button>
 
         {/* Share */}
         <div className="flex items-center justify-end">

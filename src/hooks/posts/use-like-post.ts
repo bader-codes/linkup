@@ -19,6 +19,7 @@ export default function useLikePost() {
     mutationFn: ({ postId }: LikePostVariables) => likePostAPI(postId),
 
     onMutate: async ({ postId, userId }) => {
+      // Prevent in-flight requests from overwriting the optimistic update
       await queryClient.cancelQueries({
         queryKey: ["posts"],
       });
@@ -29,6 +30,7 @@ export default function useLikePost() {
         queryKey: ["posts"],
       });
 
+      // Update all cached post lists immediately before the API request completes
       queryClient.setQueriesData<InfiniteData<GetAllPostsResponse>>(
         {
           queryKey: ["posts"],
@@ -72,6 +74,7 @@ export default function useLikePost() {
     onError: (_error, _variables, context) => {
       if (!context) return;
 
+      // Restore the previous cache state if the like request fails
       context.previousQueries.forEach(([queryKey, data]) => {
         queryClient.setQueryData(queryKey, data);
       });
