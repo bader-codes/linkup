@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PostSkeleton() {
   return (
-    <Card className="w-[95%] md:w-[85%] lg:w-[65%] mx-auto my-4">
+    <Card className="my-4 w-full">
       {/* Header */}
       <CardHeader className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -33,7 +33,7 @@ export default function PostSkeleton() {
       </CardContent>
 
       {/* Footer */}
-      <CardFooter className="w-full flex justify-between bg-white border-none">
+      <CardFooter className="flex w-full justify-between border-none bg-white">
         <Skeleton className="h-6 w-10" />
         <Skeleton className="h-6 w-10" />
         <Skeleton className="h-6 w-10" />

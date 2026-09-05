@@ -21,7 +21,7 @@ export default function useCreateComment() {
       }),
 
     onSuccess: (response, variables) => {
-      // Update comments cache
+      // 1. Update comments cache
       queryClient.setQueryData<InfiniteData<GetCommentsResponse>>(
         ["comments", variables.postId],
         (oldData) => {
@@ -36,10 +36,7 @@ export default function useCreateComment() {
                 ...page,
                 data: {
                   ...page.data,
-                  comments: [
-                    response.data.comment,
-                    ...page.data.comments,
-                  ],
+                  comments: [response.data.comment, ...page.data.comments],
                 },
               };
             }),
@@ -47,7 +44,7 @@ export default function useCreateComment() {
         },
       );
 
-      // Update posts cache
+      // 2. Update Home / Following posts
       queryClient.setQueriesData<InfiniteData<GetAllPostsResponse>>(
         {
           queryKey: ["posts"],
@@ -62,10 +59,40 @@ export default function useCreateComment() {
               data: {
                 ...page.data,
                 posts: page.data.posts.map((post) =>
-                  post.id === variables.postId
+                  post._id === variables.postId
                     ? {
                         ...post,
                         commentsCount: post.commentsCount + 1,
+                        topComment: response.data.comment,
+                      }
+                    : post,
+                ),
+              },
+            })),
+          };
+        },
+      );
+
+      // 3. Update MyProfile posts
+      queryClient.setQueriesData<InfiniteData<GetAllPostsResponse>>(
+        {
+          queryKey: ["user-posts"],
+        },
+        (oldData) => {
+          if (!oldData) return oldData;
+
+          return {
+            ...oldData,
+            pages: oldData.pages.map((page) => ({
+              ...page,
+              data: {
+                ...page.data,
+                posts: page.data.posts.map((post) =>
+                  post._id === variables.postId
+                    ? {
+                        ...post,
+                        commentsCount: post.commentsCount + 1,
+                        topComment: response.data.comment,
                       }
                     : post,
                 ),

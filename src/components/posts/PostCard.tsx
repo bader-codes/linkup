@@ -7,10 +7,10 @@ import DescComment from "../comments/PostComments/PostComments";
 import TopComment from "../comments/top-comment/TopComment";
 
 import { Dialog, DialogContent } from "../ui/dialog";
+import PostContent from "../posts/PostContent";
+import PostActions from "../posts/PostActions";
+import PostHeader from "../posts/PostHeader";
 import { Card } from "@/components/ui/card";
-import PostContent from "./PostContent";
-import PostActions from "./PostActions";
-import PostHeader from "./PostHeader";
 import { useState } from "react";
 
 interface PostCardProps {
@@ -22,14 +22,14 @@ export default function PostCard({ post }: PostCardProps) {
   const [commentsOpen, setCommentsOpen] = useState(false);
 
   return (
-    <Card className="mx-auto my-4 w-[95%] overflow-y-auto md:w-[85%] lg:w-[65%]">
+    <Card className="my-4 overflow-y-auto">
       <PostHeader post={post} />
 
       <PostContent post={post} />
 
       <PostActions post={post} onCommentClick={() => setCommentsOpen(true)} />
 
-      {post.commentsCount > 0 && (
+      {post.commentsCount > 1 && (
         <button
           type="button"
           onClick={() => setCommentsOpen(true)}

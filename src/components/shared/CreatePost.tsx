@@ -1,8 +1,10 @@
 import { createPost } from "@/api/posts/create-post.api";
+import { AuthContext } from "@/context/AuthContext";
 import { queryClient } from "@/lib/queryClient";
+import { FaCameraRetro } from "react-icons/fa6";
+import { useContext, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Loader2 } from "lucide-react";
-import { useContext, useState } from "react";
 
 import {
   Dialog,
@@ -11,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { AuthContext } from "@/context/AuthContext";
 
 export default function CreatePost() {
   const [image, setImage] = useState<File | null>(null);
@@ -46,9 +47,13 @@ export default function CreatePost() {
 
       setOpen(false);
 
-      // Refetch Posts after create post
-      queryClient.invalidateQueries({
+      // Refresh posts
+      await queryClient.invalidateQueries({
         queryKey: ["posts"],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["user-posts"],
       });
     } catch (error) {
       console.log(error);
@@ -69,7 +74,7 @@ export default function CreatePost() {
         }
       }}
     >
-      <div className="w-[95%] md:w-[85%] lg:w-[65%] mx-auto px-4 py-3 md:py-5 bg-white rounded-md flex items-center gap-3">
+      <div className="w-full mx-auto px-4 py-3 md:py-5 bg-white rounded-md flex items-center gap-3">
         <DialogTrigger className="w-full rounded-xl p-2 md:p-3 bg-[#F0F2F5] text-left text-gray-500 cursor-pointer">
           What's on your mind?
         </DialogTrigger>
@@ -114,7 +119,7 @@ export default function CreatePost() {
                 htmlFor="post-image"
                 className="cursor-pointer rounded-lg bg-gray-200 px-3 py-2 hover:bg-gray-300"
               >
-                🖼️ Photo
+                <FaCameraRetro className="size-5 lg:size-6" />
               </label>
 
               <input
@@ -148,7 +153,7 @@ export default function CreatePost() {
           </div>
 
           <button
-            disabled={!canSubmit}
+            disabled={!canSubmit || isLoading}
             onClick={() => handleCreatePost()}
             className="mt-4 w-full rounded-lg bg-blue-600 py-2.5 font-semibold text-white hover:bg-blue-700 cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
