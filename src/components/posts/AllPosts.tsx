@@ -1,7 +1,7 @@
 import useInfiniteScroll from "@/hooks/shared/use-infinite-scroll";
 import useAllPosts from "@/hooks/posts/use-all-posts";
 import { useSearchParams } from "react-router-dom";
-import PostSkeleton from "../shared/PostSkeleton";
+import PostSkeleton from "./PostSkeleton";
 import PostCard from "./PostCard";
 
 export default function AllPosts() {
@@ -25,7 +25,13 @@ export default function AllPosts() {
   });
 
   if (isLoading) {
-    return <PostSkeleton />;
+    return (
+      <div className="mx-auto w-[95%] md:w-[85%] lg:w-[65%]">
+        <PostSkeleton />
+        <PostSkeleton />
+        <PostSkeleton />
+      </div>
+    );
   }
 
   if (isError) {
@@ -35,7 +41,9 @@ export default function AllPosts() {
   return (
     <div className="my-2">
       {posts.map((post) => (
-        <PostCard key={post._id} post={post} />
+        <div key={post._id} className="mx-auto w-[95%] md:w-[85%] lg:w-[65%]">
+          <PostCard post={post} />
+        </div>
       ))}
 
       <div ref={sentinelRef} className="h-10">

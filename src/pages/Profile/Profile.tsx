@@ -1,3 +1,5 @@
+import ProfileContent from "@/components/profile/ProfileContent";
+
 export default function Profile() {
-  return <div>Profile</div>;
+  return <ProfileContent />;
 }

@@ -1,5 +1,5 @@
 import SuggestionsSidebar from "@/components/home/sidebar/SuggestionsSidebar";
-import CreatePost from "@/components/home/create-post/CreatePost";
+import CreatePost from "@/components/shared/CreatePost";
 import Container from "@/components/shared/Container.tsx";
 import AllPosts from "@/components/posts/AllPosts";
 
@@ -15,7 +15,10 @@ export default function Home() {
 
           {/* Posts */}
           <main className="w-full">
-            <CreatePost />
+            <div className="w-[95%] md:w-[85%] lg:w-[65%] mx-auto">
+              <CreatePost />
+            </div>
+
             <AllPosts />
           </main>
         </div>
