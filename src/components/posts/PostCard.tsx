@@ -1,6 +1,7 @@
 import type { Comment } from "@/types/comments/get-comments.response";
 import type { Post } from "@/types/posts/get-all-posts.response";
 
+import PostComments from "../comments/PostComments/PostComments";
 import CommentForm from "../comments/create-comment/CommentForm";
 import CommentCard from "../comments/comment-card/CommentCard";
 import TopComment from "../comments/top-comment/TopComment";
@@ -11,7 +12,6 @@ import PostActions from "../posts/PostActions";
 import PostHeader from "../posts/PostHeader";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
-import PostComments from "../comments/PostComments/PostComments";
 
 interface PostCardProps {
   post: Post;
@@ -40,7 +40,7 @@ export default function PostCard({ post }: PostCardProps) {
       )}
 
       <Dialog open={commentsOpen} onOpenChange={setCommentsOpen}>
-        <DialogContent className="sm:max-w-2xl">
+        <DialogContent className="sm:max-w-2xl pt-4 pb-0 px-2">
           <PostComments post={post} />
         </DialogContent>
       </Dialog>

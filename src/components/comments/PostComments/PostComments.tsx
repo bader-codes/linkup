@@ -12,7 +12,7 @@ type PostCommentsProps = {
 
 export default function PostComments({ post }: PostCommentsProps) {
   return (
-    <Card className="mx-auto my-4 flex h-150 w-[95%] flex-col overflow-hidden ring-0">
+    <Card className="mx-auto my-4 flex h-150 w-full flex-col overflow-hidden ring-0">
       <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto">
         <PostHeader post={post} />
 
