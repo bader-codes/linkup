@@ -3,7 +3,7 @@ import ProfileSkeleton from "../shared/ProfileSkeleton";
 import PostSkeleton from "../posts/PostSkeleton";
 import CreatePost from "../shared/CreatePost";
 import ProfileHeader from "./ProfileHeader";
-import MyPosts from "../posts/UserPosts";
+import UserPosts from "../posts/UserPosts";
 
 export default function ProfileContent() {
   const { data, isLoading, isError } = useProfileData();
@@ -27,7 +27,7 @@ export default function ProfileContent() {
     <div className="mx-auto w-full max-w-4xl space-y-4">
       <ProfileHeader user={user} />
       <CreatePost />
-      <MyPosts />
+      <UserPosts userId={user._id}/>
     </div>
   );
 }
