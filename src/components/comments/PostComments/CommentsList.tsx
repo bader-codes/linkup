@@ -49,7 +49,7 @@ export default function CommentsList({ postId }: CommentsListProps) {
   }
 
   return (
-    <div className="space-y-4 px-4 py-4">
+    <div className="space-y-4 p-2">
       {comments.map((comment) => (
         <CommentCard key={comment._id} comment={comment} />
       ))}

@@ -1,21 +1,13 @@
 import useInfiniteScroll from "@/hooks/shared/use-infinite-scroll";
 import PostSkeleton from "@/components/posts/PostSkeleton";
 import useUserPosts from "@/hooks/users/use-user-posts";
-import { AuthContext } from "@/context/AuthContext";
-import { useContext } from "react";
 import PostCard from "./PostCard";
 
-export default function UserPosts() {
-  const authContext = useContext(AuthContext);
+type UserPostsProps = {
+  userId: string;
+};
 
-  if (!authContext) {
-    throw new Error("MyPosts must be used within AuthContextProvider");
-  }
-
-  const { user } = authContext;
-
-  const userId = user?._id ?? "";
-
+export default function UserPosts({ userId }: UserPostsProps) {
   const {
     data,
     isLoading,

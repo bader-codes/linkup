@@ -19,7 +19,7 @@ type TopCommentProps = {
 
 export default function CommentCard({ comment }: TopCommentProps) {
   return (
-    <Card className="mx-4 rounded-lg border-0 bg-gray-50 py-2 shadow-none ring-0 gap-1">
+    <Card className="rounded-lg border-0 bg-gray-50 py-2 shadow-none ring-0 gap-1">
       <CardHeader className="flex flex-row items-start justify-between gap-3 px-4 py-2">
         <div className="flex min-w-0 items-start gap-3">
           <Link

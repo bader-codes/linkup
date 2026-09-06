@@ -9,7 +9,7 @@ import { useContext } from "react";
 
 interface PostActionsProps {
   post: Post;
-  
+
   // Optional because PostActions is also rendered inside DescComment
   // where the Comment action doesn't need to open another dialog.
   onCommentClick?: () => void;
@@ -66,11 +66,9 @@ export default function PostActions({
           onClick={onCommentClick}
           className="cursor-pointer"
         >
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-2">
             <div className="flex items-center gap-2">
               <GoComment className="size-5 transition-transform group-hover:scale-110" />
-
-              <span className="text-sm font-medium">Comment</span>
             </div>
 
             <span className="text-sm font-medium">
@@ -88,8 +86,6 @@ export default function PostActions({
             >
               <RiShareForwardFill className="size-5 transition-transform group-hover:scale-110" />
             </button>
-
-            <span className="text-sm font-medium">Share</span>
           </div>
         </div>
       </div>

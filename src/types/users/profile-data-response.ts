@@ -26,8 +26,8 @@ export interface ProfileUser {
 export interface ProfileResponse {
   success: boolean;
   message: string;
-
   data: {
     user: ProfileUser;
+    isFollowing: boolean;
   };
 }
