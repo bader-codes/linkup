@@ -11,7 +11,7 @@ export default function PostDetails() {
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
-      navigate("/");
+      navigate(-1);
     }
   };
 
