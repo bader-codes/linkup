@@ -11,6 +11,7 @@ import PostContent from "../posts/PostContent";
 import PostActions from "../posts/PostActions";
 import PostHeader from "../posts/PostHeader";
 import { useState } from "react";
+import PostUpdate from "./PostUpdate";
 
 interface PostCardProps {
   post: Post;
@@ -18,12 +19,13 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   const [newComment, setNewComment] = useState<Comment | null>(null);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   const navigate = useNavigate();
 
   return (
     <Card className="my-4">
-      <PostHeader post={post} isShare={post.isShare} />
+      <PostHeader post={post} onEdit={() => setIsEditOpen(true)} />
 
       {post.sharedPost ? (
         <Card className="mx-4 rounded-sm px-2">
@@ -58,6 +60,8 @@ export default function PostCard({ post }: PostCardProps) {
           onCommentCreated={(comment) => setNewComment(comment)}
         />
       )}
+
+      <PostUpdate post={post} open={isEditOpen} onOpenChange={setIsEditOpen} />
     </Card>
   );
 }
