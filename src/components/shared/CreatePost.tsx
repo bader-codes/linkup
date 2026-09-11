@@ -1,9 +1,9 @@
-import { createPost } from "@/api/posts/create-post.api";
+import useCreatePost from "@/hooks/posts/use-create-post";
 import { AuthContext } from "@/context/AuthContext";
-import { queryClient } from "@/lib/queryClient";
 import { FaCameraRetro } from "react-icons/fa6";
 import { useContext, useState } from "react";
 import { MdClose } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 
 import {
@@ -13,13 +13,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Link } from "react-router-dom";
 
 export default function CreatePost() {
   const [image, setImage] = useState<File | null>(null);
   const [open, setOpen] = useState(false);
   const [body, setBody] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const authContext = useContext(AuthContext);
 
@@ -31,35 +29,22 @@ export default function CreatePost() {
 
   const canSubmit = Boolean(body.trim() || image);
 
+  const { mutateAsync, isPending } = useCreatePost();
+
   const handleCreatePost = async () => {
     if (!body.trim() && !image) return;
 
     try {
-      setIsLoading(true);
-
-      await createPost({
+      await mutateAsync({
         body: body.trim(),
         image: image ?? undefined,
       });
 
-      // Reset form after successful post
       setBody("");
       setImage(null);
-
       setOpen(false);
-
-      // Refresh posts
-      await queryClient.invalidateQueries({
-        queryKey: ["posts"],
-      });
-
-      await queryClient.invalidateQueries({
-        queryKey: ["user-posts"],
-      });
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -98,7 +83,7 @@ export default function CreatePost() {
         </DialogHeader>
 
         {/* Overlay */}
-        {isLoading && (
+        {isPending && (
           <div className="absolute inset-0 z-50 flex flex-col items-center justify-center rounded-lg bg-background/70 backdrop-blur-[2px]">
             <Loader2 className="size-8 animate-spin" />
             <span className="mt-3 font-semibold text-lg text-gray-700">
@@ -157,7 +142,7 @@ export default function CreatePost() {
           </div>
 
           <button
-            disabled={!canSubmit || isLoading}
+            disabled={!canSubmit || isPending}
             onClick={() => handleCreatePost()}
             className="mt-4 w-full rounded-lg bg-blue-600 py-2.5 font-semibold text-white hover:bg-blue-700 cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
