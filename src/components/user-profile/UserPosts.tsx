@@ -1,6 +1,6 @@
 import PostSkeleton from "@/components/posts/PostSkeleton";
 import useUserPosts from "@/hooks/users/use-user-posts";
-import PostCard from "./PostCard";
+import PostCard from "../posts/PostCard";
 
 type UserPostsProps = {
   userId: string;
@@ -24,8 +24,7 @@ export default function UserPosts({ userId }: UserPostsProps) {
     return <div>Something went wrong.</div>;
   }
 
-  const posts =
-    data?.pages.flatMap((page) => page.data.posts) ?? [];
+  const posts = data?.pages.flatMap((page) => page.data.posts) ?? [];
 
   if (posts.length === 0) {
     return <div>No posts yet.</div>;

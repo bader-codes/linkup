@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { ProfileUser } from "@/types/users/profile-data-response";
 import cover from "../../assets/images/Cover.jpg";
+import { FaBirthdayCake } from "react-icons/fa";
 
 type ProfileHeaderProps = {
   user: ProfileUser;
@@ -77,14 +78,44 @@ export default function ProfileHeader({
           </div>
         </div>
 
+        {/* Personal Info */}
+        <div className="mt-3 flex items-center gap-6">
+          <div>
+            <p className="text-xs font-medium text-muted-foreground">Gender</p>
+
+            <p className="mt-1 text-sm font-semibold capitalize">
+              {user.gender}
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs font-medium text-muted-foreground">
+              Birthday
+            </p>
+
+            <div className="flex items-center gap-2.5">
+              <p className="mt-1 text-sm font-semibold">
+                {new Date(user.dateOfBirth).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p>
+              <FaBirthdayCake />
+            </div>
+          </div>
+        </div>
+
         {/* Created At */}
-        <div className="mt-3 text-sm text-muted-foreground">
-          Created At ·{" "}
-          {new Date(user.createdAt).toLocaleDateString("en-US", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          })}
+        <div className="flex mt-3 gap-1 text-sm text-muted-foreground">
+          <span>Created At -</span>
+          <p className="font-semibold text-gray-500">
+            {new Date(user.createdAt).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
+          </p>
         </div>
       </div>
     </section>
