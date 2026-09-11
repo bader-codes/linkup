@@ -2,7 +2,7 @@ import UserProfileHeader from "@/components/user-profile/UserProfileHeader";
 import ProfileSkeleton from "@/components/shared/ProfileSkeleton";
 import useUserProfile from "@/hooks/users/use-user-profile";
 import PostSkeleton from "@/components/posts/PostSkeleton";
-import UserPosts from "@/components/posts/UserPosts";
+import UserPosts from "@/components/user-profile/UserPosts";
 import { useParams } from "react-router-dom";
 
 export default function UserProfile() {
