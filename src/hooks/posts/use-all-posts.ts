@@ -34,32 +34,30 @@ export default function useAllPosts(feed: FeedType) {
     },
   });
 
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      if (!query.data) return;
+useEffect(() => {
+  window.scrollTo(0, 0);
 
-      // Refresh only the first page to pick up newly created posts
-      const latestPage =
-        feed === "following"
-          ? await getFollowingFeedAPI(1, LIMIT)
-          : await getAllPostsAPI(1, LIMIT);
+  const refreshFirstPage = async () => {
+    const latestPage =
+      feed === "following"
+        ? await getFollowingFeedAPI(1, LIMIT)
+        : await getAllPostsAPI(1, LIMIT);
 
-      queryClient.setQueryData<InfiniteData<GetAllPostsResponse>>(
-        queryKey,
-        (oldData) => {
-          if (!oldData) return oldData;
+    queryClient.setQueryData<InfiniteData<GetAllPostsResponse>>(
+      queryKey,
+      (oldData) => {
+        if (!oldData) return oldData;
 
-          // Replace the first page while preserving already loaded pages
-          return {
-            ...oldData,
-            pages: [latestPage, ...oldData.pages.slice(1)],
-          };
-        },
-      );
-    }, REFRESH_INTERVAL);
+        return {
+          ...oldData,
+          pages: [latestPage, ...oldData.pages.slice(1)],
+        };
+      },
+    );
+  };
 
-    return () => clearInterval(interval);
-  }, [feed, query.data, queryKey]);
+  refreshFirstPage();
+}, [feed]);
 
   const posts = query.data?.pages.flatMap((page) => page.data.posts) ?? [];
 
