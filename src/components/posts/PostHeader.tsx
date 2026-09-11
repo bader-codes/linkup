@@ -3,7 +3,9 @@ import PostTimestamp from "@/components/shared/PostTimestamp";
 import { AuthContext } from "@/context/AuthContext";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { CardHeader } from "@/components/ui/card";
+import { AiFillDelete } from "react-icons/ai";
 import { FaBookmark } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 
@@ -11,15 +13,16 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 interface PostHeaderProps {
   post: Post;
-  isShare?: boolean;
+  onEdit?: () => void;
 }
 
-export default function PostHeader({ post, isShare }: PostHeaderProps) {
+export default function PostHeader({ post, onEdit }: PostHeaderProps) {
   // Get User Data From Auth Context To Redirect My Profile
   const authContext = useContext(AuthContext);
 
@@ -56,22 +59,41 @@ export default function PostHeader({ post, isShare }: PostHeaderProps) {
           <PostTimestamp createdAt={post.createdAt} />
         </div>
       </div>
-      
-      {/* Post actions */}
-      {isShare && (
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger className="flex h-9 w-9 items-center justify-center rounded-full text-sm hover:bg-gray-100 cursor-pointer">
-            <HiDotsHorizontal className="size-5" />
-          </DropdownMenuTrigger>
 
-          <DropdownMenuContent className="flex w-40 flex-col items-center px-4 py-1 md:w-45">
-            <DropdownMenuItem className="my-2 flex w-full cursor-pointer items-center justify-center gap-2 text-lg hover:bg-blue-500 hover:text-white">
-              <span>Save post</span>
-              <FaBookmark />
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
+      {/* Post actions */}
+      <DropdownMenu>
+        <DropdownMenuTrigger className="flex h-9 w-9 items-center justify-center rounded-full text-sm hover:bg-gray-100 cursor-pointer">
+          <HiDotsHorizontal className="size-5" />
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent className="flex w-50 flex-col items-center px-1 py-2 md:w-50">
+          <DropdownMenuItem className="py-2 px-2 my-1 flex w-full cursor-pointer rounded-sm items-center gap-4 text-sm hover:bg-blue-500 hover:text-white">
+            <span>Save</span>
+            <FaBookmark style={{ width: "17px", height: "17px" }} />
+          </DropdownMenuItem>
+
+          {/* Current User Actions */}
+          {user?._id === post.user._id && (
+            <div className="w-full">
+              <DropdownMenuSeparator className="border w-full border-gray-300" />
+
+              <DropdownMenuItem
+                onClick={onEdit}
+                className="py-2 px-2 my-1 flex w-full cursor-pointer rounded-sm items-center gap-4 text-sm hover:bg-blue-500 hover:text-white"
+              >
+                <span>Edit post</span>
+                <FaEdit style={{ width: "17px", height: "17px" }} />
+              </DropdownMenuItem>
+
+              <DropdownMenuItem className="py-2 px-2 my-1 flex w-full cursor-pointer rounded-sm items-center gap-3 text-sm hover:bg-blue-500 hover:text-white">
+                <span>Delete post</span>
+
+                <AiFillDelete style={{ width: "21px", height: "21px" }} />
+              </DropdownMenuItem>
+            </div>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </CardHeader>
   );
 }
