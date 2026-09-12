@@ -1,8 +1,5 @@
-import type { Comment } from "@/types/comments/get-comments.response";
 import type { Post } from "@/types/posts/get-all-posts.response";
-
 import CommentForm from "../comments/create-comment/CommentForm";
-import CommentCard from "../comments/comment-card/CommentCard";
 import TopComment from "../comments/top-comment/TopComment";
 
 import useDeletePost from "@/hooks/posts/use-delete-post";
@@ -12,15 +9,14 @@ import { useNavigate } from "react-router-dom";
 import PostContent from "../posts/PostContent";
 import PostActions from "../posts/PostActions";
 import PostHeader from "../posts/PostHeader";
-import PostUpdate from "./PostUpdate";
 import { useEffect, useState } from "react";
+import PostUpdate from "./PostUpdate";
 
 interface PostCardProps {
   post: Post;
 }
 
 export default function PostCard({ post }: PostCardProps) {
-  const [newComment, setNewComment] = useState<Comment | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -68,14 +64,7 @@ export default function PostCard({ post }: PostCardProps) {
 
       {post.topComment && <TopComment comment={post.topComment} />}
 
-      {newComment && <CommentCard comment={newComment} />}
-
-      {post.commentsCount > 0 && (
-        <CommentForm
-          post={post}
-          onCommentCreated={(comment) => setNewComment(comment)}
-        />
-      )}
+      {post.commentsCount > 0 && <CommentForm post={post} />}
 
       <PostUpdate post={post} open={isEditOpen} onOpenChange={setIsEditOpen} />
 

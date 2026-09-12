@@ -1,24 +1,19 @@
 import { commentSchema, type CommentFormValues } from "@/schemas/commentSchema";
-import type { Comment } from "@/types/comments/get-comments.response";
 import useCreateComment from "@/hooks/comments/use-create-comment";
 import type { Post } from "@/types/posts/get-all-posts.response";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useId, useState } from "react";
 import { RiSendInsFill } from "react-icons/ri";
+import { LuCamera } from "react-icons/lu";
 import { IoClose } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { LuCamera } from "react-icons/lu";
 
 interface CommentInputProps {
   post: Post;
-  onCommentCreated?: (comment: Comment) => void;
 }
 
-export default function CommentForm({
-  post,
-  onCommentCreated,
-}: CommentInputProps) {
+export default function CommentForm({ post }: CommentInputProps) {
   const { mutateAsync: createComment } = useCreateComment();
 
   const [previewUrl, setPreviewUrl] = useState<string>();
@@ -61,16 +56,16 @@ export default function CommentForm({
 
   // Create the comment and notify the parent with the newly created comment
   const commentSubmit = async (data: CommentFormValues) => {
+    const commentData = {
+      postId: post._id,
+      content: data.commentValue,
+      image: data.image?.[0],
+    };
+
+    reset();
+
     try {
-      const response = await createComment({
-        postId: post._id,
-        content: data.commentValue,
-        image: data.image?.[0],
-      });
-
-      onCommentCreated?.(response.data.comment);
-
-      reset();
+      await createComment(commentData);
     } catch (error) {
       console.log(error);
     }
