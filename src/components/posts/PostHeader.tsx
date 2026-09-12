@@ -16,13 +16,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { VscVerifiedFilled } from "react-icons/vsc";
 
 interface PostHeaderProps {
   post: Post;
   onEdit?: () => void;
+  onDelete?: () => void;
 }
 
-export default function PostHeader({ post, onEdit }: PostHeaderProps) {
+export default function PostHeader({
+  post,
+  onEdit,
+  onDelete,
+}: PostHeaderProps) {
   // Get User Data From Auth Context To Redirect My Profile
   const authContext = useContext(AuthContext);
 
@@ -49,12 +55,30 @@ export default function PostHeader({ post, onEdit }: PostHeaderProps) {
         </Link>
 
         <div>
-          <Link
-            to={profilePath}
-            className="block text-lg font-semibold hover:underline"
-          >
-            {post.user.name}
-          </Link>
+          <div className="flex items-center gap-1.5">
+            <Link
+              to={profilePath}
+              className="block text-lg font-semibold hover:underline"
+            >
+              {post.user.name}
+            </Link>
+
+            {post.user._id === "6a84532b8ebe92c2c0424aa6" && (
+              <div className="relative group">
+                <VscVerifiedFilled className="size-4.5 cursor-pointer text-blue-500" />
+
+                <span
+                  className={`
+                      w-fit absolute left-1/2 top-full z-50 mt-2 hidden -translate-x-1/2
+                      whitespace-nowrap rounded-sm bg-gray-700 px-3 py-1.5 text-sm
+                      text-white group-hover:block font-medium
+                    `}
+                >
+                  The most important person at Linkup
+                </span>
+              </div>
+            )}
+          </div>
 
           <PostTimestamp createdAt={post.createdAt} />
         </div>
@@ -85,7 +109,10 @@ export default function PostHeader({ post, onEdit }: PostHeaderProps) {
                 <FaEdit style={{ width: "17px", height: "17px" }} />
               </DropdownMenuItem>
 
-              <DropdownMenuItem className="py-2 px-2 my-1 flex w-full cursor-pointer rounded-sm items-center gap-3 text-sm hover:bg-blue-500 hover:text-white">
+              <DropdownMenuItem
+                onClick={onDelete}
+                className="py-2 px-2 my-1 flex w-full cursor-pointer rounded-sm items-center gap-3 text-sm hover:bg-blue-500 hover:text-white"
+              >
                 <span>Delete post</span>
 
                 <AiFillDelete style={{ width: "21px", height: "21px" }} />

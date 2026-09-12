@@ -5,13 +5,15 @@ import CommentForm from "../comments/create-comment/CommentForm";
 import CommentCard from "../comments/comment-card/CommentCard";
 import TopComment from "../comments/top-comment/TopComment";
 
+import useDeletePost from "@/hooks/posts/use-delete-post";
 import { Card, CardHeader } from "@/components/ui/card";
+import DeletePostDialog from "./DeletePostDialog";
 import { useNavigate } from "react-router-dom";
 import PostContent from "../posts/PostContent";
 import PostActions from "../posts/PostActions";
 import PostHeader from "../posts/PostHeader";
-import { useState } from "react";
 import PostUpdate from "./PostUpdate";
+import { useEffect, useState } from "react";
 
 interface PostCardProps {
   post: Post;
@@ -19,13 +21,27 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   const [newComment, setNewComment] = useState<Comment | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   const navigate = useNavigate();
 
+  // Handle delete Post
+  const { mutate: deletePost, isPending, isSuccess } = useDeletePost();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setDeleteDialogOpen(false);
+    }
+  }, [isSuccess]);
+
   return (
     <Card className="my-4">
-      <PostHeader post={post} onEdit={() => setIsEditOpen(true)} />
+      <PostHeader
+        post={post}
+        onEdit={() => setIsEditOpen(true)}
+        onDelete={() => setDeleteDialogOpen(true)}
+      />
 
       {post.sharedPost ? (
         <Card className="mx-4 rounded-sm px-2">
@@ -62,6 +78,14 @@ export default function PostCard({ post }: PostCardProps) {
       )}
 
       <PostUpdate post={post} open={isEditOpen} onOpenChange={setIsEditOpen} />
+
+      <DeletePostDialog
+        isPending={isPending}
+        isSuccess={isSuccess}
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        onConfirm={() => deletePost(post._id)}
+      />
     </Card>
   );
 }
