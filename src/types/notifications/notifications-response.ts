@@ -37,7 +37,7 @@ export interface Notification {
   _id: string;
   recipient: NotificationUser;
   actor: NotificationUser;
-  type: "like_post" | "comment_post" | "share_post";
+  type: "like_post" | "comment_post" | "share_post" | "follow_user";
   entityType: "post";
   entityId: string;
   isRead: boolean;
