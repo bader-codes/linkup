@@ -1,6 +1,7 @@
 import type { Comment } from "@/types/comments/get-comments.response";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import PostTimestamp from "@/components/shared/PostTimestamp";
+import { VscVerifiedFilled } from "react-icons/vsc";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { BiSolidLike } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
@@ -36,9 +37,14 @@ export default function CommentCard({ comment }: TopCommentProps) {
           <div className="min-w-0">
             <Link
               to={`/profile/${comment.commentCreator.username}`}
-              className="block truncate text-sm font-semibold text-gray-900 hover:underline"
+              className="flex items-center gap-1.5 truncate text-sm font-semibold text-gray-900 hover:underline"
             >
               {comment.commentCreator.name}
+              {comment.commentCreator._id === "6a84532b8ebe92c2c0424aa6" && (
+                <div className="relative group">
+                  <VscVerifiedFilled className="cursor-pointer text-blue-500" />
+                </div>
+              )}
             </Link>
 
             <PostTimestamp createdAt={comment.createdAt} />

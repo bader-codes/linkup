@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { ProfileUser } from "@/types/users/profile-data-response";
+import { VscVerifiedFilled } from "react-icons/vsc";
 import cover from "../../assets/images/Cover.jpg";
 import { FaBirthdayCake } from "react-icons/fa";
 
@@ -39,7 +40,25 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
         {/* Name & Username */}
         <div className="mt-3">
           <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
-            {user.name}
+            <div className="relative flex items-center gap-1.5">
+              <span>{user.name}</span>
+
+              {user._id === "6a84532b8ebe92c2c0424aa6" && (
+                <div className="relative group">
+                  <VscVerifiedFilled className="size-5 cursor-pointer text-blue-500" />
+
+                  <span
+                    className={`
+                      w-fit absolute left-1/2 top-full z-50 mt-2 hidden -translate-x-1/2
+                      whitespace-nowrap rounded-sm bg-gray-700 px-3 py-1.5 text-sm
+                      text-white group-hover:block font-medium
+                    `}
+                  >
+                    The most important person at Linkup
+                  </span>
+                </div>
+              )}
+            </div>
           </h1>
 
           <p className="mt-0.5 text-sm text-muted-foreground">
