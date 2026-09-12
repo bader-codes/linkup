@@ -2,12 +2,13 @@ import type { Notification } from "@/types/notifications/notifications-response"
 import PostTimestamp from "@/components/shared/PostTimestamp";
 import { MdMarkAsUnread } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { VscVerifiedFilled } from "react-icons/vsc";
 
 interface NotificationItemProps {
   notification: Notification;
   onClose: () => void;
   onMarkAsRead: (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLElement>,
     notificationId: string,
   ) => void;
 }
@@ -27,14 +28,24 @@ export default function NotificationItem({
 
       case "share_post":
         return "shared your post.";
+
+      case "follow_user":
+        return "started following you.";
     }
   };
 
   return (
     <div className="group relative">
       <Link
-        to={`/post/${notification.entityId}`}
-        onClick={onClose}
+        to={
+          notification.type === "follow_user"
+            ? `/users/${notification.actor._id}`
+            : `/post/${notification.entityId}`
+        }
+        onClick={(event) => {
+          onMarkAsRead(event, notification._id);
+          onClose();
+        }}
         className="flex items-center gap-3 px-3 py-3 transition-colors hover:bg-muted/50"
       >
         <img
@@ -49,7 +60,14 @@ export default function NotificationItem({
               notification.isRead ? "text-gray-500" : "text-gray-700"
             }`}
           >
-            <span className="font-semibold">{notification.actor.name}</span>{" "}
+            <span className="font-semibold flex items-center gap-1.5">
+              {notification.actor.name}
+              {notification.actor._id === "6a84532b8ebe92c2c0424aa6" && (
+                <div className="relative group">
+                  <VscVerifiedFilled className="size-3.5 cursor-pointer text-blue-500" />
+                </div>
+              )}
+            </span>{" "}
             <span>{getMessage()}</span>
           </p>
 

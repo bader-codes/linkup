@@ -81,7 +81,7 @@ export default function Notifications() {
   const { mutate: markAsRead } = useMarkAsRead();
 
   const handleMarkAsRead = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLElement>,
     notificationId: string,
   ) => {
     event.stopPropagation();
@@ -173,7 +173,9 @@ export default function Notifications() {
                   onMarkAsRead={handleMarkAsRead}
                   key={notification._id}
                   notification={notification}
-                  onClose={() => setOpen(false)}
+                  onClose={() => {
+                    setOpen(false)
+                  }}
                 />
               ))}
 
