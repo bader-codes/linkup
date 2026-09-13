@@ -1,6 +1,7 @@
 import type { Post } from "@/types/posts/get-all-posts.response";
 import PostTimestamp from "@/components/shared/PostTimestamp";
 import { AuthContext } from "@/context/AuthContext";
+import { VscVerifiedFilled } from "react-icons/vsc";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { CardHeader } from "@/components/ui/card";
 import { AiFillDelete } from "react-icons/ai";
@@ -16,7 +17,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { VscVerifiedFilled } from "react-icons/vsc";
 
 interface PostHeaderProps {
   post: Post;

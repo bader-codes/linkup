@@ -1,15 +1,15 @@
 import CommentForm from "@/components/comments/create-comment/CommentForm";
+import DeletePostDialog from "@/components/posts/DeletePostDialog";
 import type { Post } from "@/types/posts/get-all-posts.response";
+import useDeletePost from "@/hooks/posts/use-delete-post";
 import PostActions from "@/components/posts/PostActions";
 import PostContent from "@/components/posts/PostContent";
 import PostHeader from "@/components/posts/PostHeader";
-import { Card } from "@/components/ui/card";
-import CommentsList from "./CommentsList";
-import { useEffect, useState } from "react";
-import useDeletePost from "@/hooks/posts/use-delete-post";
 import PostUpdate from "@/components/posts/PostUpdate";
-import DeletePostDialog from "@/components/posts/DeletePostDialog";
 import { useNavigate } from "react-router-dom";
+import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import CommentsList from "./CommentsList";
 
 type PostDetailsContentProps = {
   post: Post;

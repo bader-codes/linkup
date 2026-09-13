@@ -1,5 +1,5 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { getNotifications } from "@/api/notifications/get-notifications.api";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 const LIMIT = 20;
 

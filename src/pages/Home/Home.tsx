@@ -1,6 +1,6 @@
 import SuggestionsSidebar from "@/components/home/sidebar/SuggestionsSidebar";
-import CreatePost from "@/components/shared/CreatePost";
 import Container from "@/components/shared/Container.tsx";
+import CreatePost from "@/components/shared/CreatePost";
 import AllPosts from "@/components/posts/AllPosts";
 
 export default function Home() {

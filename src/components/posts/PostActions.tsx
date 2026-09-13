@@ -4,12 +4,12 @@ import useLikePost from "@/hooks/posts/use-like-post";
 import { RiShareForwardFill } from "react-icons/ri";
 import { AuthContext } from "@/context/AuthContext";
 import { CardFooter } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 import { BiSolidLike } from "react-icons/bi";
 import { GoComment } from "react-icons/go";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 interface PostActionsProps {
   post: Post;

@@ -1,8 +1,8 @@
 import type { Notification } from "@/types/notifications/notifications-response";
 import PostTimestamp from "@/components/shared/PostTimestamp";
+import { VscVerifiedFilled } from "react-icons/vsc";
 import { MdMarkAsUnread } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { VscVerifiedFilled } from "react-icons/vsc";
 
 interface NotificationItemProps {
   notification: Notification;

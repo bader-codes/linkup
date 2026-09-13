@@ -1,9 +1,9 @@
 import useProfileData from "@/hooks/users/use-profile-data";
 import ProfileSkeleton from "../shared/ProfileSkeleton";
+import UserPosts from "../user-profile/UserPosts";
 import PostSkeleton from "../posts/PostSkeleton";
 import CreatePost from "../shared/CreatePost";
 import ProfileHeader from "./ProfileHeader";
-import UserPosts from "../user-profile/UserPosts";
 
 export default function ProfileContent() {
   const { data, isLoading, isError } = useProfileData();

@@ -1,11 +1,12 @@
+import { DropdownMenuSeparator } from "../ui/dropdown-menu";
+import { LuLoaderCircle } from "react-icons/lu";
+
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { DropdownMenuSeparator } from "../ui/dropdown-menu";
-import { LuLoaderCircle } from "react-icons/lu";
 
 
 interface DeletePostDialogProps {

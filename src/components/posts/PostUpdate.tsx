@@ -1,8 +1,10 @@
 import type { Post } from "@/types/posts/get-all-posts.response";
+import useUpdatePost from "@/hooks/posts/use-update-post";
 import { FaCameraRetro } from "react-icons/fa6";
-import { MdClose } from "react-icons/md";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { MdClose } from "react-icons/md";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 import {
   Dialog,
@@ -10,9 +12,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-import useUpdatePost from "@/hooks/posts/use-update-post";
-import { Loader2 } from "lucide-react";
 
 interface PostUpdateProps {
   post: Post;
