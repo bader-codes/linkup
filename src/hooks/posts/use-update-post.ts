@@ -58,6 +58,22 @@ export default function useUpdatePost() {
           };
         },
       );
+
+      queryClient.setQueryData(["post", variables.postId], (oldData: any) => {
+        if (!oldData) return oldData;
+
+        return {
+          ...oldData,
+          data: {
+            ...oldData.data,
+            post: {
+              ...oldData.data.post,
+              ...updatedPost,
+              user: oldData.data.post.user,
+            },
+          },
+        };
+      });
     },
   });
 }
