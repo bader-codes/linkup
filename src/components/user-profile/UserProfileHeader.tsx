@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { ProfileUser } from "@/types/users/profile-data-response";
+import useFollowUser from "@/hooks/users/use-follow-user";
 import cover from "../../assets/images/Cover.jpg";
 import { FaBirthdayCake } from "react-icons/fa";
 
@@ -12,6 +13,13 @@ export default function ProfileHeader({
   user,
   isFollowing,
 }: ProfileHeaderProps) {
+  const { mutate: followUser } = useFollowUser();
+
+  // Trigger the follow/unfollow mutation for the current profile user.
+  const handleFollowUser = () => {
+    followUser(user._id);
+  };
+
   return (
     <section className="overflow-hidden rounded-xl border bg-card shadow-sm">
       {/* Cover */}
@@ -54,10 +62,15 @@ export default function ProfileHeader({
 
           <button
             type="button"
+            onClick={handleFollowUser}
             className={`
-              rounded-lg border cursor-pointer px-4 py-2 text-sm font-medium transition-colors
-              ${isFollowing ? "bg-gray-200 text-black" : "bg-blue-600 text-white hover:bg-blue-600/80"}
-              `}
+              cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors
+              ${
+                isFollowing
+                  ? "bg-gray-200 text-black"
+                  : "bg-blue-600 text-white hover:bg-blue-600/80"
+              }
+            `}
           >
             {isFollowing ? "Unfollow" : "Follow"}
           </button>
@@ -101,14 +114,16 @@ export default function ProfileHeader({
                   year: "numeric",
                 })}
               </p>
+
               <FaBirthdayCake />
             </div>
           </div>
         </div>
 
         {/* Created At */}
-        <div className="flex mt-3 gap-1 text-sm text-muted-foreground">
+        <div className="mt-3 flex gap-1 text-sm text-muted-foreground">
           <span>Created At -</span>
+
           <p className="font-semibold text-gray-500">
             {new Date(user.createdAt).toLocaleDateString("en-GB", {
               day: "numeric",
