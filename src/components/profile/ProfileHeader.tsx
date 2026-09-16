@@ -3,12 +3,16 @@ import type { ProfileUser } from "@/types/users/profile-data-response";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import cover from "../../assets/images/Cover.jpg";
 import { FaBirthdayCake } from "react-icons/fa";
+import ChangePhoto from "./ChangePhoto";
+import { useState } from "react";
 
 type ProfileHeaderProps = {
   user: ProfileUser;
 };
 
 export default function ProfileHeader({ user }: ProfileHeaderProps) {
+  const [photoDialogOpen, setPhotoDialogOpen] = useState(false);
+
   return (
     <section className="overflow-hidden rounded-xl border bg-card shadow-sm">
       {/* Cover */}
@@ -24,7 +28,10 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
       <div className="px-4 pb-4 sm:px-6">
         {/* Avatar */}
         <div className="-mt-12 sm:-mt-14">
-          <Avatar className="size-24 border-4 border-card bg-card shadow-sm sm:size-28">
+          <Avatar
+            className="size-24 border-4 border-card bg-card shadow-sm sm:size-28 cursor-pointer"
+            onClick={() => setPhotoDialogOpen(true)}
+          >
             <AvatarImage
               src={user.photo}
               alt={user.name}
@@ -35,6 +42,12 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
               {user.name.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
+
+          <ChangePhoto
+            open={photoDialogOpen}
+            onOpenChange={setPhotoDialogOpen}
+            user={user}
+          />
         </div>
 
         {/* Name & Username */}
@@ -52,7 +65,7 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
                       w-fit absolute left-1/2 top-full z-50 mt-2 hidden -translate-x-1/2
                       whitespace-nowrap rounded-sm bg-gray-700 px-3 py-1.5 text-sm
                       text-white group-hover:block font-medium
-                    `}
+                      `}
                   >
                     The most important person at Linkup
                   </span>
