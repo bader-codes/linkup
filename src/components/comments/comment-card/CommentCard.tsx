@@ -2,10 +2,13 @@ import type { Comment } from "@/types/comments/get-comments.response";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import PostTimestamp from "@/components/shared/PostTimestamp";
 import { VscVerifiedFilled } from "react-icons/vsc";
+import ReplyForm from "../create-reply/ReplyForm";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { FaAngleDown } from "react-icons/fa6";
 import { BiSolidLike } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+
 
 import {
   DropdownMenu,
@@ -16,9 +19,15 @@ import {
 
 type TopCommentProps = {
   comment: Comment;
+  isReplyOpen?: boolean;
+  onReply?: (commentId: string) => void;
 };
 
-export default function CommentCard({ comment }: TopCommentProps) {
+export default function CommentCard({
+  comment,
+  onReply,
+  isReplyOpen,
+}: TopCommentProps) {
   return (
     <Card className="rounded-lg border-0 bg-gray-50 py-2 shadow-none ring-0 gap-1">
       <CardHeader className="flex flex-row items-start justify-between gap-3 px-4 py-2">
@@ -81,18 +90,10 @@ export default function CommentCard({ comment }: TopCommentProps) {
             />
           )}
 
-          {comment.repliesCount > 0 && (
-            <button
-              type="button"
-              className="mt-2 cursor-pointer text-sm font-medium text-blue-600 hover:underline"
-            >
-              Show {comment.repliesCount} replies
-            </button>
-          )}
-
           <div className="mt-1 flex items-center gap-4">
             <button
               type="button"
+              onClick={() => onReply?.(comment._id)}
               className="cursor-pointer text-xs font-semibold text-gray-500 transition-colors hover:text-blue-600"
             >
               Reply
@@ -106,6 +107,22 @@ export default function CommentCard({ comment }: TopCommentProps) {
               <span className="text-xs font-semibold">Like</span>
             </button>
           </div>
+
+          {comment.repliesCount > 0 && (
+            <button
+              type="button"
+              className="mt-2 flex items-center gap-2 cursor-pointer text-sm font-medium"
+            >
+              <span>Show {comment.repliesCount} replies</span>
+              <FaAngleDown />
+            </button>
+          )}
+
+          {isReplyOpen && (
+            <div className="mt-3">
+              <ReplyForm comment={comment} />
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

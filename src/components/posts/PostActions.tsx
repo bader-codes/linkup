@@ -111,7 +111,7 @@ export default function PostActions({
             </div>
 
             <span className="text-sm font-medium">
-              {post.commentsCount > 0 ? post.commentsCount : ""}
+              {post.commentsCount > 0 && post.commentsCount}
             </span>
           </div>
         </button>
