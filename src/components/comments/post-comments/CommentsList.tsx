@@ -3,12 +3,15 @@ import useInfiniteScroll from "@/hooks/shared/use-infinite-scroll";
 import CommentSkeleton from "@/components/shared/CommentSkeleton";
 import useComments from "@/hooks/comments/use-comments";
 import { LiaCommentSlashSolid } from "react-icons/lia";
+import { useState } from "react";
 
 type CommentsListProps = {
   postId: string;
 };
 
 export default function CommentsList({ postId }: CommentsListProps) {
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+
   const {
     data,
     isLoading,
@@ -51,7 +54,14 @@ export default function CommentsList({ postId }: CommentsListProps) {
   return (
     <div className="space-y-4 p-2">
       {comments.map((comment) => (
-        <CommentCard key={comment._id} comment={comment} />
+        <CommentCard
+          key={comment._id}
+          comment={comment}
+          isReplyOpen={replyingTo === comment._id}
+          onReply={(commentId) =>
+            setReplyingTo((prev) => (prev === commentId ? null : commentId))
+          }
+        />
       ))}
 
       <div ref={loadMoreRef} className="h-1" />

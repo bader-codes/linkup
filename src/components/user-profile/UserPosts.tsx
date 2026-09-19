@@ -1,12 +1,15 @@
 import PostSkeleton from "@/components/posts/PostSkeleton";
 import useUserPosts from "@/hooks/users/use-user-posts";
 import PostCard from "../posts/PostCard";
+import { useState } from "react";
 
 type UserPostsProps = {
   userId: string;
 };
 
 export default function UserPosts({ userId }: UserPostsProps) {
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
+
   const {
     data,
     isLoading,
@@ -34,7 +37,13 @@ export default function UserPosts({ userId }: UserPostsProps) {
     <div className="my-2">
       {posts.map((post) => (
         <div key={post._id} className="mx-auto w-full">
-          <PostCard post={post} />
+          <PostCard
+            post={post}
+            replyingTo={replyingTo}
+            onReply={(commentId) =>
+              setReplyingTo((prev) => (prev === commentId ? null : commentId))
+            }
+          />
         </div>
       ))}
 

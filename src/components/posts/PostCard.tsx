@@ -14,9 +14,11 @@ import PostUpdate from "./PostUpdate";
 
 interface PostCardProps {
   post: Post;
+  replyingTo?: string | null;
+  onReply?: (commentId: string) => void;
 }
 
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post, onReply, replyingTo }: PostCardProps) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -30,6 +32,7 @@ export default function PostCard({ post }: PostCardProps) {
       setDeleteDialogOpen(false);
     }
   }, [isSuccess]);
+  
 
   return (
     <Card className="my-4">
@@ -62,7 +65,13 @@ export default function PostCard({ post }: PostCardProps) {
         </button>
       )}
 
-      {post.topComment && <TopComment comment={post.topComment} />}
+      {post.topComment && (
+        <TopComment
+          comment={post.topComment}
+          isReplyOpen={replyingTo === post.topComment._id}
+          onReply={onReply}
+        />
+      )}
 
       {post.commentsCount > 0 && <CommentForm post={post} />}
 
